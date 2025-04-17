@@ -1,3 +1,5 @@
+#idan.shumski@gmail.com
+
 CppC = g++
 CppCFLAGS = -std=c++11 -Wall 
 TARGET = program
@@ -31,3 +33,11 @@ Main: $(TARGET)
 
 test: $(TEST_TARGET)
 	./$(TEST_TARGET)
+
+valgrind_main: $(TARGET)
+	valgrind --leak-check=full --track-origins=yes ./$(TARGET)
+
+valgrind_test: $(TEST_TARGET)
+	valgrind --leak-check=full --track-origins=yes ./$(TEST_TARGET)
+
+valgrind: valgrind_main valgrind_test

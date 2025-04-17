@@ -1,3 +1,5 @@
+//idan.shumski@gmail.com
+
 #include <iostream>
 #include <stdexcept>
 #include <cmath>
@@ -243,6 +245,12 @@ SquareMat SquareMat::operator^(int num) const {
     if (num < 0) {
         throw std::invalid_argument("Power must be non-negative");
     }
+    if (num == 0) {
+        return identity(size); 
+    }
+    if (num == 1) {
+        return *this; 
+    }
     SquareMat result = identity(size); // when num = 0 this is the identity matrix.
     SquareMat base = *this;
     while (num > 0) {
@@ -301,13 +309,13 @@ const double& SquareMat::ConstRow:: operator[](int j) const {
 //overloading the [] operator to return a NonConstRow and a ConstRow object.
 SquareMat::NonConstRow SquareMat::operator[](int i) {
     if (i < 0 || i >= size) {
-        throw std::out_of_range("Index out of range, please enter a valid index between 0 and size-1");
+        throw std::out_of_range("Index out of range, please enter a valid index between 0 and " + std::to_string(size - 1));
     }
     return NonConstRow(matrix[i]);
 }
 SquareMat::ConstRow SquareMat::operator[](int i) const {
     if (i < 0 || i >= size) {
-        throw std::out_of_range("Index out of range, please enter a valid index between 0 and size-1");
+        throw std::out_of_range("Index out of range, please enter a valid index between 0 and " + std::to_string(size - 1));
     }
     return ConstRow(matrix[i]);
 }
@@ -421,9 +429,14 @@ SquareMat& SquareMat::operator%=(const SquareMat& other) {
 std::ostream& operator<<(std::ostream& os, const SquareMat& mat) {
     for (int i = 0; i < mat.size; ++i) {
         for (int j = 0; j < mat.size; ++j) {
-            os << mat.matrix[i][j] << " ";
+            os << mat.matrix[i][j];
+            if (j < mat.size - 1) {
+                os << " ";
+            }
         }
-        os << std::endl;
+        if (i < mat.size - 1) {
+            os << "\n";
+        }
     }
     return os;
 }
