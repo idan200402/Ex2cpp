@@ -23,11 +23,11 @@ Features:
 -Postfix and prefix increment and decrement operators.
 - Comperison operators
 -Output operator
--Exception handling for example:
-    - operations on two matrices of different sizes.
-    -division by zero.
-    -out of bounds access.
-    -and more.
+- Exception handling, for example:
+    - Operations on two matrices of different sizes.
+    - Division by zero.
+    - Out-of-bounds access.
+    - And more.
 
 Files:
 - `SquareMatrix.h`: header file for the SquareMatrix class, containing the class definition and method signatures.
@@ -45,6 +45,7 @@ Building and Running:
 1. to run the main file: make Main
 2. to run the tests: make test
 3. to check for memory leaks: make valgrind
+4. to clean the output files and .o files: make clean
 
 Author:
 Idan Shumski 325693422
