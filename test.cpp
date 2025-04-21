@@ -55,7 +55,12 @@ TEST_CASE("Constructor and Destructor") {
         SquareMat mat2(4);
         //assaign mat1 to mat2 even if mat2 is not the same size.
         mat2 = mat1;
-        CHECK(mat2 == mat1);
+        //checking if all values are the same.
+        for(int i = 0; i < 3; ++i) {
+            for (int j = 0; j < 3; ++j) {
+                CHECK(mat2.get(i, j) == mat1.get(i, j));
+            }
+        }
     }
     SUBCASE("Destructor") {
         SquareMat* mat = new SquareMat(3);
